@@ -23,6 +23,9 @@ def smoke(source, report):
     from viewer import Viewer
 
     app = QApplication.instance() or QApplication(sys.argv)
+    from PySide6.QtGui import QIcon
+
+    app.setWindowIcon(QIcon(str(Path(__file__).parent / "assets" / "app.ico")))
     app.setStyle("Fusion")
     window = Viewer()
     window.show()
@@ -97,6 +100,9 @@ if __name__ == "__main__":
         from viewer import Viewer
 
         app = QApplication(sys.argv)
+        from PySide6.QtGui import QIcon
+
+        app.setWindowIcon(QIcon(str(Path(__file__).parent / "assets" / "app.ico")))
         app.setStyle("Fusion")
         window = Viewer()
         window.show()
