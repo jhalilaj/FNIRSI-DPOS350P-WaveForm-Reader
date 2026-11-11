@@ -1,0 +1,22 @@
+{
+  "bytes": 948310,
+  "sha256": "6635ddd661fa6aa6a36672c1428e74d0f78913a24fd5a425cebedff0acefd58c",
+  "package_signature": "DPOS350P",
+  "parts": [
+    {
+      "signature": "eGON.BMP",
+      "header_offset": 4096,
+      "declared_bytes": 100864,
+      "fits_in_file": true,
+      "payload_offset_candidate": 4128
+    },
+    {
+      "signature": "eGON.EXE",
+      "header_offset": 331776,
+      "declared_bytes": 612352,
+      "fits_in_file": true,
+      "payload_offset_candidate": 331808
+    }
+  ],
+  "executed": false
+}

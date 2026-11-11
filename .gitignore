@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+build/
+dist/
+reader-settings.ini
+
+# Local decoded exports and previous validation artifacts
+/capture-6/
+/corpus/
+/reference-validation/
+.env
+.env.*
+*.log
