@@ -3,7 +3,7 @@
 import json, sys, time
 from pathlib import Path
 
-VERSION = "0.1.1"
+VERSION = "1.0.0"
 
 
 def wait_idle(viewer, timeout=30):
