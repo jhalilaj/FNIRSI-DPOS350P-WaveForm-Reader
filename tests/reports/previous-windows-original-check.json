@@ -1,0 +1,150 @@
+{
+  "version": "0.1.1",
+  "framework": "PySide6 + PyQtGraph",
+  "frozen": true,
+  "passed": true,
+  "captures": [
+    {
+      "file": "1.wav",
+      "channels": [
+        "CH1",
+        "CH2"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 23752
+    },
+    {
+      "file": "10.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "raw",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "11.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "raw",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "12.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "13.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "14.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "15.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "16.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "17.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "2.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "3.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "4.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "raw",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "5.wav",
+      "channels": [
+        "CH1",
+        "CH2"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 23752
+    },
+    {
+      "file": "6.wav",
+      "channels": [
+        "CH1",
+        "CH2"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 23752
+    },
+    {
+      "file": "7.wav",
+      "channels": [
+        "CH1",
+        "CH2"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 23752
+    },
+    {
+      "file": "8.wav",
+      "channels": [
+        "CH1",
+        "CH2"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 23752
+    },
+    {
+      "file": "9.wav",
+      "channels": [
+        "CH1",
+        "CH2"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 23752
+    }
+  ]
+}

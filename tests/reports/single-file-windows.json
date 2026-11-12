@@ -1,0 +1,65 @@
+{
+  "version": "1.0.1",
+  "framework": "PySide6 + PyQtGraph",
+  "frozen": true,
+  "passed": true,
+  "captures": [
+    {
+      "file": "1.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "2.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "3.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "4.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "5.wav",
+      "channels": [
+        "CH1"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "6.wav",
+      "channels": [
+        "CH2"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 47504
+    },
+    {
+      "file": "7.wav",
+      "channels": [
+        "CH1",
+        "CH2"
+      ],
+      "units": "V inferred",
+      "samples_per_channel": 23752
+    }
+  ]
+}

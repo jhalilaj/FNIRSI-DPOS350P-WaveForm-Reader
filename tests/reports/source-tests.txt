@@ -1,0 +1,4 @@
+2026-11-12 — after source-folder reorganization
+Python unittest discovery: tests/test*.py, PYTHONPATH=src
+82 tests passed in 8.055 seconds.
+Previous Windows JSON results describe the earlier packaged version, not the new single-file build.
