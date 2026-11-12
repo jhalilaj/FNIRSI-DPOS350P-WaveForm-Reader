@@ -56,6 +56,6 @@ The output is `dist/DPOS350P-Reader.exe`.
 
 ## Support and license
 
-The observed layout has been checked against 24 supplied captures, including seven 1X references. Unrecognized/inconsistent settings remain raw-only. Physical calibration, exact hardware trigger timing, 10X/100X and multi-firmware compatibility are not claimed. Offline measurements are estimates. BMP screenshots and reduced CAP waveform profiles are not supported as sample inputs. Persistence is disabled because static files contain no acquisition history.
+The observed layout has been checked against 24 supplied captures, including seven 1X references. Unrecognized/inconsistent settings remain raw-only. Offline measurements are estimates. BMP screenshots and reduced CAP waveform profiles are not supported as sample inputs. Persistence is disabled because static files contain no acquisition history.
 
 [MIT License](LICENSE). Not affiliated with FNIRSI. The license covers this project's code, not vendor firmware, documentation or trademarks.
