@@ -1,4 +1,4 @@
-# FNIRSI DPOS350P Offline Reader
+# FNIRSI DPOS350P WaveForm Reader
 
 Unofficial Windows viewer for FNIRSI DPOS350P waveform WAV files, built with **PySide6 and PyQtGraph**. Samples and measurements come from the waveform file, never from screenshots.
 
@@ -8,7 +8,7 @@ Unofficial Windows viewer for FNIRSI DPOS350P waveform WAV files, built with **P
 
 ## Download and run
 
-Download **DPOS350P-Reader.exe** from [Releases](https://github.com/jhalilaj/DPOS350P-Reader/releases). The single-file Windows build does not need a separate `_internal` folder or Python installation. It extracts its bundled runtime to a temporary folder while running, so startup can take a few seconds.
+Download **DPOS350P-Reader.exe** from [Releases](https://github.com/jhalilaj/FNIRSI-DPOS350P-WaveForm-Reader/releases). The single-file Windows build does not need a separate `_internal` folder or Python installation. It extracts its bundled runtime to a temporary folder while running, so startup can take a few seconds.
 
 To run from source, install Python **3.11+**, run `Install-Dependencies.bat`, then `Open-Viewer.bat`. Alternatively:
 
