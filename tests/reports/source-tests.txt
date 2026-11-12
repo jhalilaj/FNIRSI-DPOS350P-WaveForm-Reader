@@ -2,3 +2,7 @@
 Python unittest discovery: tests/test*.py, PYTHONPATH=src
 82 tests passed in 8.055 seconds.
 Previous Windows JSON results describe the earlier packaged version, not the new single-file build.
+
+2026-11-12 — probe scaling fix
+3 probe-scaling, 21 decoder and 11 Qt tests passed (35 relevant checks).
+Rebuilt standalone v1.0.1 passed startup with both synthetic mixed 10X/100X fixtures in voltage mode.

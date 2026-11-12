@@ -373,6 +373,7 @@ class Viewer(QMainWindow):
         body.addWidget(side)
         channels = self._card("⌁  Channels", sv)
         self.channel_checks = {}
+        self.probe_labels = {}
         for name in ("CH1", "CH2", "MATH"):
             line = QHBoxLayout()
             check = ScopeCheckBox()
@@ -391,6 +392,12 @@ class Viewer(QMainWindow):
                 f"background:{COLORS[name]};color:#07121b;border-radius:5px;font-weight:800;padding:4px;"
             )
             line.addWidget(chip)
+            if name != "MATH":
+                probe = QLabel("—")
+                probe.setStyleSheet(f"color:{COLORS[name]};font-weight:650;font-size:11px;")
+                probe.setToolTip("Probe attenuation saved in this waveform file")
+                self.probe_labels[name] = probe
+                line.addWidget(probe)
             line.addStretch()
             more = QPushButton("•••")
             more.setFixedWidth(30)
@@ -809,6 +816,10 @@ class Viewer(QMainWindow):
         )
 
     def _sync_channels(self):
+        calibration = self.meta.get("calibration", {}).get("channels", {})
+        for name, label in self.probe_labels.items():
+            label.setText(calibration.get(name, {}).get("probe_label", "—"))
+            label.setVisible(name in self.channels)
         for name, check in self.channel_checks.items():
             check.blockSignals(True)
             check.setChecked(self.visible.get(name, False) and name in self.channels)

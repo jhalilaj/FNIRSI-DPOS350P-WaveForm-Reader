@@ -16,7 +16,7 @@ def fields(data, metadata, channels):
         return {'status':'unavailable: invalid or unsupported saved coordinate geometry'}
     per_pixel=u(0x1C0,4)
     acq_time=u(0x1AF)/1e12
-    result={'status':'reference-checked timing and 1X voltage model; not a hardware accuracy calibration',
+    result={'status':'saved-range voltage model with firmware probe scaling',
             'display_seconds_per_div':u(0x190)/1e12,
             'capture_seconds_per_div':acq_time,
             'samples_per_pixel_candidate':per_pixel,
@@ -29,6 +29,11 @@ def fields(data, metadata, channels):
     for name,raw in channels.items():
         if name not in ('CH1','CH2'):continue
         i=int(name[-1])-1; shift=i*0x41
+        # Firmware 0x4004A608 applies 1/10/100 to display range before
+        # 0x4003BEB4 copies it to retained range. Serializer stores the ranges
+        # at 0x6D/0x75 (CH2 +0x41); never multiply these values a second time.
+        probe_index=u(0x67+shift,1)
+        probe_factor={0:1,1:10,2:100}.get(probe_index)
         display_gain=u(0x6D+shift)/1e6
         gain=u(0x75+shift)/1e6
         position=signed(0x81+shift,4)
@@ -42,10 +47,13 @@ def fields(data, metadata, channels):
                     (predicted_min-measurements['min_v'])/quantum] if quantum>0 else None)
         tolerance=max(0.,measurements['peak_to_peak_v'])*0.02+2*quantum
         strict=bool(residuals and max(abs(x) for x in residuals)<=1.5)
-        valid=bool(0<gain<=1000 and abs(position)<=10000 and residuals and
+        valid=bool(probe_factor is not None and 0<gain<=1000*probe_factor and abs(position)<=10000 and residuals and
                    max(abs(predicted_max-measurements['max_v']),abs(predicted_min-measurements['min_v']))<=tolerance and
                    measurements['max_v']>=measurements['min_v'])
         result['channels'][name]={
+            'probe_index':probe_index,'probe_factor':probe_factor,
+            'probe_label':f'{probe_factor}X' if probe_factor is not None else 'Unknown',
+            'probe_basis':'firmware 0x4001EBE4/0x4004A608; saved ranges already include probe factor',
             'display_volts_per_div':display_gain,'capture_volts_per_div':gain,
             'capture_zero_position':position,'display_zero_position':signed(0x7D+shift,4),'candidate_volts_per_count':slope,
             'candidate_zero_raw':zero,'stored_readouts':measurements,
@@ -53,7 +61,7 @@ def fields(data, metadata, channels):
             'endpoint_residual_adc_steps':residuals,'conversion_usable':valid,
             'strict_extrema_agreement':strict,'plausibility_tolerance_v':tolerance,
             'consistency': ('strict extrema agreement' if strict else 'plausible conversion; extrema differ between samples and stored readouts') if valid else 'conflict; voltage conversion disabled',
-            'confidence':'coordinate model checked on supplied 0 V, DC and 1X square-wave references; other probe factors remain unverified'}
+            'confidence':'saved-range coordinate model; probe factor decoded from the channel settings'}
     return result
 
 
