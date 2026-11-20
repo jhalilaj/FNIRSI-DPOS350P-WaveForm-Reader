@@ -57,6 +57,14 @@ class Job(QtCore.QRunnable):
             self.signals.failed.emit(self.kind, self.token, str(exc))
 
 
+class TimeAxis(pg.AxisItem):
+    def tickStrings(self, values, scale, spacing):
+        labels = super().tickStrings(values, scale, spacing)
+        if self.labelUnits == "s":
+            return [f"{label} {self.labelUnitPrefix}s" if label else "" for label in labels]
+        return labels
+
+
 class AmplitudeAxis(pg.AxisItem):
     def __init__(self, viewer):
         super().__init__("left")
@@ -525,7 +533,9 @@ class Viewer(QMainWindow):
         plot_card.setObjectName("card")
         pl = QVBoxLayout(plot_card)
         pl.setContentsMargins(16, 15, 14, 12)
-        self.plot = ScopePlot(axisItems={"left": AmplitudeAxis(self)})
+        self.plot = ScopePlot(
+            axisItems={"left": AmplitudeAxis(self), "bottom": TimeAxis("bottom")}
+        )
         self.plot.setBackground("#070e13")
         self.plot.showGrid(x=True, y=True, alpha=0.22)
         self.plot.setMenuEnabled(False)
