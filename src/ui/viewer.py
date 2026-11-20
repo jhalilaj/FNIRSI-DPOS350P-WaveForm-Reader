@@ -810,6 +810,7 @@ class Viewer(QMainWindow):
         self.origin_selector.blockSignals(False)
         self.file_label.setText("▤  File: " + self.filename.name)
         dt = self.dt()
+        self.length_label.setToolTip("" if dt else "Timing unavailable: saved timebase or sample geometry could not be verified.")
         self.length_label.setText(
             f'Length: {pg.siFormat((self.n-1)*dt,suffix="s") if dt else str(self.n)+" samples"}   ({self.n:,} pts/channel)'
         )
@@ -858,7 +859,7 @@ class Viewer(QMainWindow):
         return origin_sample(self.meta, self.time_origin)
 
     def time_axis(self):
-        return bool(self.dt() and self.units == "V inferred")
+        return bool(self.dt())
 
     def sample_to_x(self, index):
         return (index - self.origin()) * self.dt() if self.time_axis() else index
@@ -949,7 +950,7 @@ class Viewer(QMainWindow):
             )
         self.plot.setLabel(
             "bottom",
-            "Time" if self.time_axis() else "Sample",
+            "Time" if self.time_axis() else "Sample (timing unavailable)",
             units="s" if self.time_axis() else None,
         )
         self.plot.setLabel(

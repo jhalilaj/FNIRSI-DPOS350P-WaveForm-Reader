@@ -1,4 +1,6 @@
 """Inferred calibration fields, with fail-closed consistency checks."""
+from decoder.timing import retained_interval
+
 MEASURES = ('max_v','min_v','mean_v','rms_v','peak_v','peak_to_peak_v')
 TIMED_MEASURES = (('frequency_hz',1e3),('period_s',1e12),('positive_width_s',1e12),('negative_width_s',1e12),('positive_duty_percent',100),('negative_duty_percent',100))
 
@@ -21,7 +23,7 @@ def fields(data, metadata, channels):
             'capture_seconds_per_div':acq_time,
             'samples_per_pixel_candidate':per_pixel,
             'coordinate_geometry':{'horizontal_pixels_per_div':horizontal,'vertical_pixels_per_div':vertical,'raw_units_per_pixel':coordinate_scale,'basis':'serialized state fields and firmware initialization/measurement code'},
-            'sample_interval_s_candidate':acq_time/(horizontal*per_pixel) if acq_time>0 and per_pixel in (25,50) else None,
+            'sample_interval_s_candidate':retained_interval(data, metadata, horizontal, per_pixel, signed(0x1AF)),
             'time_origin':'first exported sample; trigger time unknown',
             'timing_basis':'saved horizontal grid geometry; reference-checked at 95 pixels/div on CH1, CH2 and both channels',
             'channels':{}}

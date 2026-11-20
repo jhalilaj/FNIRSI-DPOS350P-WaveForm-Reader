@@ -73,6 +73,13 @@ def decode(data):
         metadata['saved_display'] = display_fields(data,metadata)
     else:
         metadata['calibration']={'status':'unavailable: settings layout or coordinate geometry is outside inspected compatibility profile'}
+        if (metadata['compatibility']['settings_layout_matched']
+                and data[0x36:0x38] == b'\x03\xb6' and data[0x4A:0x4C] == b'\x00\x5f'):
+            from decoder.timing import retained_interval
+            metadata['calibration']['sample_interval_s_candidate'] = retained_interval(
+                data, metadata, 95, int.from_bytes(data[0x1C0:0x1C4], 'big'),
+                int.from_bytes(data[0x1AF:0x1B7], 'big', signed=True),
+            )
         metadata['saved_display']={'status':'unavailable: compatibility profile mismatch'}
         metadata['warnings'].append(metadata['compatibility']['status'])
     from decoder.scope_controls import saved_selection

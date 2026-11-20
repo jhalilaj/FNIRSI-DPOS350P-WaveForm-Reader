@@ -1,10 +1,23 @@
 """Scope-marker-based timing. Marker origin is not a calibrated trigger instant."""
+def retained_interval(data, metadata, horizontal, density, time_ps):
+    if horizontal <= 0 or density <= 0 or time_ps <= 0:
+        return None
+    # Firmware 0x4003A984 rounds the visible window to the next lane group.
+    count = metadata.get("declared_samples_per_channel")
+    if count is not None:
+        width = int.from_bytes(data[0x36:0x38], "big")
+        group = data[0xDB]
+        if not width or not group or count != (width * density // group + 1) * group:
+            return None
+    return time_ps / (1e12 * horizontal * density)
+
+
 def trigger_fields(data, calibration, sample_count):
     if len(data)<0x1D0:return {}
     integer=lambda offset:int.from_bytes(data[offset:offset+8],'big',signed=True)
     display=integer(0x190);capture=integer(0x1AF)
     per_pixel=calibration.get('samples_per_pixel_candidate')
-    if display<=0 or capture<=0 or per_pixel not in (25,50):return {}
+    if display<=0 or capture<=0 or not per_pixel or per_pixel < 0 or not calibration.get("sample_interval_s_candidate", True):return {}
     from decoder.firmware_arithmetic import signed_divide
     width=int.from_bytes(data[0x36:0x38],'big') or 950
     center=width//2
